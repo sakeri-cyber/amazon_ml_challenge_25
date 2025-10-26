@@ -72,8 +72,11 @@ class LogCoshLoss(torch.nn.Module):
 class PriceModel(torch.nn.Module):
     def __init__(self, checkpoint, cache_dir = None):
         super(PriceModel, self).__init__()
+        # Clip Model 
         self.backbone = AutoModel.from_pretrained(checkpoint, device_map='auto', cache_dir = cache_dir)
+        # Pre processing for Clip to provide the input (eg:- tokenizing texts , patching up images)
         self.processor = AutoProcessor.from_pretrained(checkpoint, cache_dir=cache_dir)
+        # Feed Forward Network - Relu Activation
         self.head = torch.nn.Sequential(torch.nn.Linear(2048, 1024), torch.nn.ReLU(), torch.nn.Linear(1024, 512), torch.nn.ReLU(), 
                                         torch.nn.Linear(512, 64), torch.nn.ReLU(), torch.nn.Linear(64, 1)).to(device=self.backbone.device)
 
