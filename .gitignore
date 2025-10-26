@@ -1,0 +1,14 @@
+*.csv
+*.zip
+convert_jsonl.ipynb
+dataset_model.ipynb
+loading_clip.ipynb
+pre_loading.ipynb
+__pycache__/
+train_images/
+test_images/
+.ipynb_checkpoints/
+hf_models/
+output/
+student_resource/
+test_output/
